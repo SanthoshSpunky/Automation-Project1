@@ -11,10 +11,10 @@ public class TestCases extends Base{
 	
 	@Test(priority = 1)
 	public void verifyLegalAge() throws InterruptedException {
-		objPage = new Pages(driver);		
-		objPage.selectElement(objPage.eleDay_AgeSelection, "30");
-		objPage.selectElement(objPage.eleMonth_AgeSelection, "05");
-		objPage.selectElement(objPage.eleYear_AgeSelection, "2015");
+		objPage = new Pages(driver,property);		
+		objPage.selectElement(objPage.eleDay_AgeSelection, property.getProperty("uday"));
+		objPage.selectElement(objPage.eleMonth_AgeSelection, property.getProperty("umonth"));
+		objPage.selectElement(objPage.eleYear_AgeSelection, property.getProperty("uyear"));
 		objPage.clickElement(objPage.btnEnter);
 		Thread.sleep(2000);
 		Assert.assertEquals(objPage.getElementText(objPage.lblLegalAgeAlertMsg),"Alert: Sorry you must be over 18 to enter.");
@@ -22,7 +22,7 @@ public class TestCases extends Base{
 	
 	@Test(priority = 2)
 	public void verifyLegalAge_GreaterThan18() throws InterruptedException {
-		objPage = new Pages(driver);
+		objPage = new Pages(driver,property);
 		
 		objPage.navigateToHomePage();
 		Thread.sleep(2000);
@@ -31,18 +31,18 @@ public class TestCases extends Base{
 	
 	@Test(priority = 3)
 	public void validateNumberOfEmployees() throws InterruptedException {
-		objPage = new Pages(driver);
+		objPage = new Pages(driver,property);
 		
 		objPage.navigateToHomePage();
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		objPage.clickElement(objPage.lblMenu);
 		objPage.clickElement(objPage.lblAboutUsSubMenu);		
 		objPage.scrollToTheExactElement(objPage.eleStatsContainer);
-		Thread.sleep(5000);
-		Assert.assertEquals(objPage.getAttributeValue(objPage.eleEmployeeCount),"5900");
-		Assert.assertEquals(objPage.getAttributeValue(objPage.eleCountryCount),"19");	
-		Assert.assertEquals(objPage.getAttributeValue(objPage.eleLicenseCount),"140");
-		Assert.assertEquals(objPage.getAttributeValue(objPage.eleJudistrictionCount),"20");
+		Thread.sleep(6000);
+		Assert.assertEquals(objPage.getAttributeValue(objPage.eleEmployeeCount),property.getProperty("employeeCount"));
+		Assert.assertEquals(objPage.getAttributeValue(objPage.eleCountryCount),property.getProperty("countryCount"));	
+		Assert.assertEquals(objPage.getAttributeValue(objPage.eleLicenseCount),property.getProperty("licenseCount"));
+		Assert.assertEquals(objPage.getAttributeValue(objPage.eleJudistrictionCount),property.getProperty("judstrictionCount"));
 		
 					
 	}

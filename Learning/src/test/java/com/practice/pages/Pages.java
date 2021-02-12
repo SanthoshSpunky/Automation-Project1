@@ -1,5 +1,7 @@
 package com.practice.pages;
 
+import java.util.Properties;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,13 +9,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 
-public class Pages {
+public class Pages  {
 	private WebDriver driver;
-	
-	public Pages(WebDriver driver) {
-		this.driver = driver;
+	private Properties _properties;
+	public Pages(WebDriver driver,Properties properties) {
+	this._properties=properties;
+	this.driver=driver;
 	}
-	
 	//Legal age page elements
 	public final By eleDay_AgeSelection = By.name("day");
 	public final By eleMonth_AgeSelection = By.name("month");
@@ -49,9 +51,9 @@ public class Pages {
 	}
 	
 	public void navigateToHomePage() {
-		selectElement(eleDay_AgeSelection, "15");
-		selectElement(eleMonth_AgeSelection, "12");
-		selectElement(eleYear_AgeSelection, "1992");
+		selectElement(eleDay_AgeSelection, _properties.getProperty("validday"));
+		selectElement(eleMonth_AgeSelection, _properties.getProperty("validmonth"));
+		selectElement(eleYear_AgeSelection, _properties.getProperty("validyear"));
 		clickElement(btnEnter);
 	}
 	
